@@ -123,21 +123,6 @@
             $weight = "$weight KG";
         }
 
-        //Making sure not more than one option is clicked
-        if ($size != null) {
-            $dimension = null;
-            $weight = null;
-        }
-        if ($weight != null) {
-            $dimension = null;
-            $size = null;
-        }
-        if ($dimension != null) {
-            $size = null;
-            $weight = null;
-        }
-
-
         //Saving to the database
         if (!array_filter($errors)) {
            //CREATE SQL
@@ -169,30 +154,99 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script>
             function test() {
+                //The Select Element
                 var selectElement = document.getElementById("productType");
                 var selectedValue = selectElement.value;
 
+                //The dynamically injected form
                 var dvd = document.getElementById("DVD");
                 var furniture = document.getElementById("Furniture");
                 var book = document.getElementById("Book");
 
-                if (selectedValue == "DVD") {
-                    dvd.classList.remove("hide");
-                    furniture.classList.add("hide");
-                    book.classList.add("hide");
-                }
+                (selectedValue == "DVD")? dvdControl(): (selectedValue == "Book")? bookControl(): furnitureControl();
 
-                if (selectedValue == "Furniture") {
-                    furniture.classList.remove("hide");
-                    dvd.classList.add("hide");
-                    book.classList.add("hide");
-                }
+            }
 
-                if (selectedValue == "Book") {
-                    book.classList.remove("hide");
-                    furniture.classList.add("hide");
-                    dvd.classList.add("hide");
-                }
+            //DVD CONTROL FUNCTION
+            function dvdControl(){
+                //The Select Element
+                var selectElement = document.getElementById("productType");
+                var selectedValue = selectElement.value;
+
+                //The dynamically injected form
+                var dvd = document.getElementById("DVD");
+                var furniture = document.getElementById("Furniture");
+                var book = document.getElementById("Book");
+
+
+                //The input values of the dynamically injected form
+                var size =document.getElementById("size");
+                var weight =document.getElementById("weight");
+                var height =document.getElementById("height");
+                var width =document.getElementById("width");
+                var length =document.getElementById("length");
+
+                dvd.classList.remove("hide");
+                furniture.classList.add("hide");
+                book.classList.add("hide");
+                weight.value = "";
+                height.value = "";
+                width.value = "";
+                length.value = "";
+            }
+
+            //BOOK CONTROL FUNCTION
+            function bookControl() {
+                //The Select Element
+                var selectElement = document.getElementById("productType");
+                var selectedValue = selectElement.value;
+
+                //The dynamically injected form
+                var dvd = document.getElementById("DVD");
+                var furniture = document.getElementById("Furniture");
+                var book = document.getElementById("Book");
+
+
+                //The input values of the dynamically injected form
+                var size =document.getElementById("size");
+                var weight =document.getElementById("weight");
+                var height =document.getElementById("height");
+                var width =document.getElementById("width");
+                var length =document.getElementById("length");
+
+                book.classList.remove("hide");
+                furniture.classList.add("hide");
+                dvd.classList.add("hide");
+                size.value = "";
+                height.value = "";
+                width.value = "";
+                length.value = "";
+            }
+
+            //FURNITURE CONTROL FUNCTION
+            function furnitureControl() {
+                //The Select Element
+                var selectElement = document.getElementById("productType");
+                var selectedValue = selectElement.value;
+
+                //The dynamically injected form
+                var dvd = document.getElementById("DVD");
+                var furniture = document.getElementById("Furniture");
+                var book = document.getElementById("Book");
+
+
+                //The input values of the dynamically injected form
+                var size =document.getElementById("size");
+                var weight =document.getElementById("weight");
+                var height =document.getElementById("height");
+                var width =document.getElementById("width");
+                var length =document.getElementById("length");
+
+                furniture.classList.remove("hide");
+                dvd.classList.add("hide");
+                book.classList.add("hide");
+                size.value = "";
+                weight.value ="";
             }
         </script>
         <style>
