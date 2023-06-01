@@ -133,4 +133,54 @@
             echo "<p>Weight: " . $this->getWeight() . "</p>";
         }
     }
+
+    //FURNITURE CLASS
+    class Furniture extends Product{
+        protected $length;
+        protected $width;
+        protected $height;
+
+        public function getLength()
+        {
+            return $this->length;
+        }
+
+        public function setLength($length)
+        {
+            $this->length = $length;
+        }
+
+        public function getWidth()
+        {
+            return $this->width;
+        }
+
+        public function setWidth($width)
+        {
+            $this->width = $width;
+        }
+
+        public function getHeight()
+        {
+            return $this->height;
+        }
+
+        public function setHeight($height)
+        {
+            $this->height = $height;
+        }
+
+        public function displayDetails()
+        {
+            // Display book-specific details
+            // You can use HTML or any other appropriate format
+            echo "<h1>Book Details</h1>";
+            echo "<p>SKU: " . $this->getSKU() . "</p>";
+            echo "<p>Name: " . $this->getName() . "</p>";
+            echo "<p>Price: " . $this->getPrice() . "</p>";
+            echo "<p>Weight: " . $this->getLength() . "</p>";
+            echo "<p>Weight: " . $this->getWidth() . "</p>";
+            echo "<p>Weight: " . $this->getHeight() . "</p>";
+        }
+    }
 ?>
