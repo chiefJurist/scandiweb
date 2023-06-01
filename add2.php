@@ -5,9 +5,9 @@
 
     // Connect to the database
     $host = 'localhost';
-    $username = 'your_username';
-    $password = 'your_password';
-    $database = 'your_database';
+    $username = 'chiefJurist';
+    $password = '#Chibueze2003';
+    $database = 'scandiweb';
 
     $db = new DatabaseConnection($host, $username, $password, $database);
     $db->connect();
@@ -15,14 +15,17 @@
     // Set the database connection for the Product class
     Product::setDatabaseConnection($db);
 
-    // Create a Book instance
-    $book = new Book();
-    $book->setName($_POST['sku']);
-    $book->setName($_POST['name']);
-    $book->setPrice($_POST['price']);
+    //If the form is submitted
+    if (isset($_POST["submit"])) {
+        // Create a Book instance
+        $book = new Book();
+        $book->setName($_POST['sku']);
+        $book->setName($_POST['name']);
+        $book->setPrice($_POST['price']);
 
-    // Save the book to the database
-    $book->save();
+        // Save the book to the database
+        $book->save();
+    }
 
 ?>
 
@@ -267,13 +270,10 @@
 
             <div id="body">
                 <div id="sku-div">SKU: <input type="text" id="sku" name="sku" placeholder="Enter SKU"></div>
-                <div class="errors"><?php echo $errors["sku"] ?></div>
 
                 <div id="name-div">Name: <input type="text" id="name" name="name" placeholder="Enter Name of product"></div>
-                <div class="errors"><?php echo $errors["name"] ?></div>
 
                 <div id="price-div">Price($): <input type="number" id="price" name="price" placeholder="Enter Product price"></div>
-                <div class="errors"><?php echo $errors["price"] ?></div>
 
                 <select name="productType" id="productType" onchange="test()">
                     <option value="DVD">DVD</option>
@@ -282,8 +282,6 @@
                 </select>
 
                 <div id="type-form">
-                    <div class="errors"><?php echo $errors["empty"] ?></div>
-                    <div class="errors"><?php echo $errors["invalid"] ?></div>
                     <div id="DVD">
                         <p>Size(MB): <input type="text" id="size" name="size"></p>
                         <P>Product Description</P>

@@ -6,9 +6,9 @@
 
     // Connect to the database
     $host = 'localhost';
-    $username = 'your_username';
-    $password = 'your_password';
-    $database = 'your_database';
+    $username = 'chiefJurist';
+    $password = '#Chibueze2003';
+    $database = 'scandiweb';
 
     $db = new DatabaseConnection($host, $username, $password, $database);
     $db->connect();
@@ -132,19 +132,21 @@
             <!--FOR THE BODY SECTION-->
             <section id="product-section">
                 <!--Individual products-->
-                <?php foreach ($products as $product){?>
-                    <div class="product-div">
-                        <div class="check-div">
-                            <input type="checkbox" class="delete-checkbox" name="delete-checkbox[]" value="<?php echo $product['id']; ?>">
+                <!--
+                    <?php foreach ($products as $product){?>
+                        <div class="product-div">
+                            <div class="check-div">
+                                <input type="checkbox" class="delete-checkbox" name="delete-checkbox[]" value="<?php echo $product['id']; ?>">
+                            </div>
+                            <p class="sku"><?php echo htmlspecialchars(strtoupper($product["sku"])) ?></p>
+                            <p class="product-name"><?php echo htmlspecialchars($product["name"]) ?></p>
+                            <p class="product-price">$<?php echo htmlspecialchars(number_format($product["price"], 2)) ?></p>
+                            <p class="product-size"><?php echo htmlspecialchars($product["size"]) ?></p>
+                            <p class="product-size"><?php echo htmlspecialchars($product["weight"]) ?></p>
+                            <p class="product-size"><?php echo htmlspecialchars($product["dimension"]) ?></p>
                         </div>
-                        <p class="sku"><?php echo htmlspecialchars(strtoupper($product["sku"])) ?></p>
-                        <p class="product-name"><?php echo htmlspecialchars($product["name"]) ?></p>
-                        <p class="product-price">$<?php echo htmlspecialchars(number_format($product["price"], 2)) ?></p>
-                        <p class="product-size"><?php echo htmlspecialchars($product["size"]) ?></p>
-                        <p class="product-size"><?php echo htmlspecialchars($product["weight"]) ?></p>
-                        <p class="product-size"><?php echo htmlspecialchars($product["dimension"]) ?></p>
-                    </div>
-                <?php } ?>
+                    <?php } ?>
+                -->
             </section>
 
             <footer>Anthony's Scandiweb Assignment</footer>

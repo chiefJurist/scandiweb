@@ -35,6 +35,10 @@
             }
             return $data;
         }
+
+        public function getConnection(){
+            return $this->connection;
+        }
     }
 
 
