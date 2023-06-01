@@ -1,49 +1,14 @@
 <?php
-    //Include the connection to database    
-    include("config.php");
+    // product-list.php
 
-    //Write query for all products
-    $sql = "SELECT * FROM products ORDER BY created_at";
+    // Include necessary class files
+    require_once 'validate.php';
 
-    //Make query and get results
-    $result = mysqli_query($conn, $sql);
-
-    //Fetch the resulting rows as am array
-    $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-
-    // IF THE DELETE BUTTON IS PRESSED
-    if (isset($_POST["delete"])) {
-        $idsToDelete = $_POST["delete-checkbox"]; // Assuming this is an array of IDs
-
-        if (!empty($idsToDelete)) {
-            $ids = implode(",", array_fill(0, count($idsToDelete), "?"));
-            $sql2 = "DELETE FROM products WHERE id IN ($ids)";
-
-            $stmt = mysqli_prepare($conn, $sql2);
-            mysqli_stmt_bind_param($stmt, str_repeat('i', count($idsToDelete)), ...$idsToDelete);
-            mysqli_stmt_execute($stmt);
-
-            if (mysqli_stmt_affected_rows($stmt) > 0) {
-                // Success
-                header("Location: index.php");
-                exit();
-            }
-        }
-    }
-
-
-    //IF THE ADD BUTTON IS CLICKED
-    if (isset($_POST["add"])) {
-        header("Location: add.php");
-        exit();
-    }
-
-    //free result from memory
-    mysqli_free_result($result);
-
-    //close connection
-    mysqli_close($conn);
+    // Create a Book instance
+    $book = new Book();
+    $book->setSKU('The Great Gatsby');
+    $book->setName('F. Scott Fitzgerald');
+    $book->setPrice('978-3-16-148410-0');
 ?>
 
 <!DOCTYPE html>

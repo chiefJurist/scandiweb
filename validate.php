@@ -9,16 +9,14 @@
 
         private $connection;
 
-        public function __construct($host, $username, $password, $database)
-        {
+        public function __construct($host, $username, $password, $database){
             $this->host = $host;
             $this->username = $username;
             $this->password = $password;
             $this->database = $database;
         }
 
-        public function connect()
-        {
+        public function connect(){
             $this->connection = mysqli_connect($this->host, $this->username, $this->password, $this->database);
             
             if (!$this->connection) {
@@ -26,13 +24,11 @@
             }
         }
 
-        public function executeQuery($query)
-        {
+        public function executeQuery($query){
             return mysqli_query($this->connection, $query);
         }
 
-        public function getResults($result)
-        {
+        public function getResults($result){
             $data = [];
             while ($row = mysqli_fetch_assoc($result)) {
                 $data[] = $row;
@@ -49,55 +45,48 @@
         protected $price;
     
         //Setters and Getters
-        public function getSKU()
-        {
+        public function getSKU(){
             return $this->sku;
         }
         
-        public function setSKU($sku)
-        {
+        public function setSKU($sku){
             $this->sku = $sku;
         }
     
-        public function getName()
-        {
+        public function getName(){
             return $this->name;
         }
     
-        public function setName($name)
-        {
+        public function setName($name){
             $this->name = $name;
         }
     
-        public function getPrice()
-        {
+        public function getPrice(){
             return $this->price;
         }
     
-        public function setPrice($price)
-        {
+        public function setPrice($price){
             $this->price = $price;
         }
     
         abstract public function displayDetails();
+
+        abstract public function save();
     }
 
     //DVD CLASS
     class DVD extends Product{
         protected $size;
 
-        public function getSize()
-        {
+        public function getSize(){
             return $this->size;
         }
 
-        public function setSize($size)
-        {
+        public function setSize($size){
             $this->size = $size;
         }
 
-        public function displayDetails()
-        {
+        public function displayDetails(){
             // Display book-specific details
             // You can use HTML or any other appropriate format
             echo "<h1>Book Details</h1>";
@@ -106,24 +95,26 @@
             echo "<p>Price: " . $this->getPrice() . "</p>";
             echo "<p>Weight: " . $this->getSize() . "</p>";
         }
+
+        public function save(){
+            // Save the book details to the database using MySQL logic
+            // You can use the properties of the class to access the data
+        }
     }
 
     //BOOK CLASS
     class Book extends Product{
         protected $weight;
 
-        public function getWeight()
-        {
+        public function getWeight(){
             return $this->weight;
         }
 
-        public function setWeight($weight)
-        {
+        public function setWeight($weight){
             $this->weight = $weight;
         }
 
-        public function displayDetails()
-        {
+        public function displayDetails(){
             // Display book-specific details
             // You can use HTML or any other appropriate format
             echo "<h1>Book Details</h1>";
@@ -131,6 +122,11 @@
             echo "<p>Name: " . $this->getName() . "</p>";
             echo "<p>Price: " . $this->getPrice() . "</p>";
             echo "<p>Weight: " . $this->getWeight() . "</p>";
+        }
+
+        public function save(){
+            // Save the book details to the database using MySQL logic
+            // You can use the properties of the class to access the data
         }
     }
 
@@ -140,38 +136,31 @@
         protected $width;
         protected $height;
 
-        public function getLength()
-        {
+        public function getLength(){
             return $this->length;
         }
 
-        public function setLength($length)
-        {
+        public function setLength($length){
             $this->length = $length;
         }
 
-        public function getWidth()
-        {
+        public function getWidth(){
             return $this->width;
         }
 
-        public function setWidth($width)
-        {
+        public function setWidth($width){
             $this->width = $width;
         }
 
-        public function getHeight()
-        {
+        public function getHeight(){
             return $this->height;
         }
 
-        public function setHeight($height)
-        {
+        public function setHeight($height){
             $this->height = $height;
         }
 
-        public function displayDetails()
-        {
+        public function displayDetails(){
             // Display book-specific details
             // You can use HTML or any other appropriate format
             echo "<h1>Book Details</h1>";
@@ -181,6 +170,11 @@
             echo "<p>Weight: " . $this->getLength() . "</p>";
             echo "<p>Weight: " . $this->getWidth() . "</p>";
             echo "<p>Weight: " . $this->getHeight() . "</p>";
+        }
+
+        public function save(){
+            // Save the book details to the database using MySQL logic
+            // You can use the properties of the class to access the data
         }
     }
 ?>

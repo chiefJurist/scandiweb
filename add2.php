@@ -1,149 +1,19 @@
-<?php 
-    //Include the connection to database    
-    include("config.php");
+<?php
 
-    //Setting the errors array
-    $errors = ["sku"=>"", "empty" => "", "invalid" => "", "price" => "", "name" => ""];
+    // add-product.php
 
+    // Include necessary class files
+    require_once 'validate.php';
 
-    //IF THE CANCEL BUTTON IS CLICKED
-    if (isset($_POST["cancel"])) {
-        header("Location: index.php");
-        exit();
-    }
+    // Create a Book instance
+    $book = new Book();
+    $book->setName($_POST['sku']);
+    $book->setName($_POST['name']);
+    $book->setPrice($_POST['price']);
 
-    //IF THE SAVE BUTTON IS CLICKED
-    if (isset($_POST["save"])) {
-        //setting sku variable
-        $sku = $_POST["sku"];
+    // Save the book to the database
+    $book->save();
 
-        //Checking if sku is empty
-        if (empty($_POST["sku"])) {
-            $errors["sku"]= "sku is required";
-        }
-
-        // check if the sku is already taken
-        $sql = "SELECT * FROM products WHERE sku = '$sku'";
-        $result = mysqli_query($conn, $sql);
-        if (mysqli_num_rows($result) > 0) {
-            $errors["sku"] = "SKU already taken";
-        }
-
-        //Creating variables to be inserted in the database
-        $name = $_POST["name"];
-        $price = $_POST["price"];
-        $size = $_POST["size"];
-        $weight = $_POST["weight"];
-        $height = $_POST["height"];
-        $length = $_POST["length"];
-        $width = $_POST["width"];
-        $dimension = "$height x $length x $width";
-
-        //Checking if the name is empty
-        if (empty($_POST)) {
-            $errors["name"] = "Name cannot be empty";
-        }
-
-        //Checking if the price is empty or invalid
-        if (empty($_POST)) {
-            $errors["price"] = "Invalid price, please input price in dollars";
-        }
-        if (!preg_match('/^\d+$/', $price)) {
-            $errors["price"] = "Invalid price, please input price in dollars";
-        }
-
-        //HANDLING CHOICE
-        if ($size == "") {
-            $size = null;
-        }
-        if ($weight == "") { 
-            $weight =  null;
-        }
-        if ($height == "") {
-           $dimension = null;
-        }
-        
-        //Checking if size is empty or invalid
-        if ($size != null) {
-            if (empty($_POST["size"])) {
-                $errors["empty"]= "file size is required";
-            }
-            if (!preg_match('/^\d+$/', $size)) {
-                $errors["invalid"] = "Invalid file size, please input MB in numbers";
-            }
-        }
-
-        //Checking if weight is empty or invalid
-        if ($weight != null) {
-            if (empty($_POST["weight"])) {
-                $errors["empty"]= "Book Weight is required";
-            }
-            if (!preg_match('/^\d+$/', $weight)) {
-                $errors["invalid"] = "Invalid weight, please input weigth in numbers";
-            }
-        }
-
-        //Checking if width is empty or invalid
-        if ($dimension != null) {
-            if (empty($_POST["width"])) {
-                $errors["empty"]= "furniture width is required";
-            }
-            if (!preg_match('/^\d+$/', $width)) {
-                $errors["invalid"] = "Invalid  width, please input width in numbers";
-            }
-        }
-
-        //Checking if height is empty or invalid
-        if ($dimension != null) {
-            if (empty($_POST["height"])) {
-                $errors["empty"]= "furniture height is required";
-            }
-            if (!preg_match('/^\d+$/', $height)) {
-                $errors["invalid"] = "Invalid height, please input height in numbers";
-            }
-        }
-
-        //Checking if length is  empty or invalid
-        if ($dimension != null) {
-            if (empty($_POST["length"])) {
-                $errors["empty"]= "furniture length is required";
-            }
-            if (!preg_match('/^\d+$/', $length)) {
-                $errors["invalid"] = "Invalid length, please input length numbers";
-            }
-        }
-
-
-        //Adding SI units
-        if ($size != null) {
-            $size = "$size MB";
-        }
-
-        if ($weight != null) {
-            $weight = "$weight KG";
-        }
-
-        //Saving to the database
-        if (!array_filter($errors)) {
-           //CREATE SQL
-            $sql2 = "INSERT INTO products(sku,name,price,size,weight,dimension) VALUES('$sku', '$name', '$price', '$size', '$weight', '$dimension')";
-
-            //SAVE TO DATABASE AND CHECK
-            if (mysqli_query($conn, $sql2)) {
-                //success
-                header('Location: index.php');
-                exit();
-            }else {
-                "Please fill in the form correctly :(";
-            }
-        }
-
-        //free result from memory
-        mysqli_free_result($result);
-
-        //close connection
-        mysqli_close($conn);
-    }
 ?>
 
 <!DOCTYPE html>
