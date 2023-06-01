@@ -1,9 +1,19 @@
 <?php
 
-    // add-product.php
-
     // Include necessary class files
     require_once 'validate.php';
+
+    // Connect to the database
+    $host = 'localhost';
+    $username = 'your_username';
+    $password = 'your_password';
+    $database = 'your_database';
+
+    $db = new DatabaseConnection($host, $username, $password, $database);
+    $db->connect();
+
+    // Set the database connection for the Product class
+    Product::setDatabaseConnection($db);
 
     // Create a Book instance
     $book = new Book();
