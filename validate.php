@@ -83,7 +83,30 @@
     }
 
     //DVD CLASS
+    class DVD extends Product{
+        protected $size;
 
+        public function getSize()
+        {
+            return $this->size;
+        }
+
+        public function setSize($size)
+        {
+            $this->size = $size;
+        }
+
+        public function displayDetails()
+        {
+            // Display book-specific details
+            // You can use HTML or any other appropriate format
+            echo "<h1>Book Details</h1>";
+            echo "<p>SKU: " . $this->getSKU() . "</p>";
+            echo "<p>Name: " . $this->getName() . "</p>";
+            echo "<p>Price: " . $this->getPrice() . "</p>";
+            echo "<p>Weight: " . $this->getSize() . "</p>";
+        }
+    }
 
     //BOOK CLASS
     class Book extends Product{
