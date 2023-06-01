@@ -71,7 +71,27 @@
     
         abstract public function displayDetails();
 
-        abstract public function save();
+        //Database Property
+        protected static $db;
+
+        // The function saves a product's details to a database table called "products".
+        public function save(){
+            $name = mysqli_real_escape_string(self::$db->getConnection(), $this->getName());
+            $price = mysqli_real_escape_string(self::$db->getConnection(), $this->getPrice());
+
+            $query = "INSERT INTO products (name, price) VALUES ('$name', '$price')";
+
+            $result = self::$db->executeQuery($query);
+
+            if (!$result){
+                die("Product saving error: " . mysqli_error(self::$db->getConnection()));
+            }
+        }
+
+        //This function sets the database connection for a static variable in a PHP class.
+        public static function setDatabaseConnection($db){
+            self::$db = $db;
+        }
     }
 
     //DVD CLASS
@@ -95,11 +115,6 @@
             echo "<p>Price: " . $this->getPrice() . "</p>";
             echo "<p>Weight: " . $this->getSize() . "</p>";
         }
-
-        public function save(){
-            // Save the book details to the database using MySQL logic
-            // You can use the properties of the class to access the data
-        }
     }
 
     //BOOK CLASS
@@ -122,11 +137,6 @@
             echo "<p>Name: " . $this->getName() . "</p>";
             echo "<p>Price: " . $this->getPrice() . "</p>";
             echo "<p>Weight: " . $this->getWeight() . "</p>";
-        }
-
-        public function save(){
-            // Save the book details to the database using MySQL logic
-            // You can use the properties of the class to access the data
         }
     }
 
@@ -170,11 +180,6 @@
             echo "<p>Weight: " . $this->getLength() . "</p>";
             echo "<p>Weight: " . $this->getWidth() . "</p>";
             echo "<p>Weight: " . $this->getHeight() . "</p>";
-        }
-
-        public function save(){
-            // Save the book details to the database using MySQL logic
-            // You can use the properties of the class to access the data
         }
     }
 ?>
