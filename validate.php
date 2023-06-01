@@ -1,6 +1,6 @@
 <?php
 
-    //Database Connection Class
+    //DATABASE CONNECTION CLASS
     class DatabaseConnection{
         private $host;
         private $username;
