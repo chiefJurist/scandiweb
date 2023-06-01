@@ -44,14 +44,19 @@
 
     //PRODUCTS CLASS
     abstract class Product{
-        protected $id;
+        protected $sku;
         protected $name;
         protected $price;
-        protected $description;
     
-        public function getId()
+        //Setters and Getters
+        public function getSKU()
         {
-            return $this->id;
+            return $this->sku;
+        }
+        
+        public function setSKU($sku)
+        {
+            $this->sku = $sku;
         }
     
         public function getName()
@@ -74,19 +79,35 @@
             $this->price = $price;
         }
     
-        public function getDescription()
-        {
-            return $this->description;
-        }
-    
-        public function setDescription($description)
-        {
-            $this->description = $description;
-        }
-    
         abstract public function displayDetails();
-    
-        abstract public function save();
     }
-    
+
+    //DVD CLASS
+
+
+    //BOOK CLASS
+    class Book extends Product{
+        protected $weight;
+
+        public function getWeight()
+        {
+            return $this->weight;
+        }
+
+        public function setWeight($weight)
+        {
+            $this->weight = $weight;
+        }
+
+        public function displayDetails()
+        {
+            // Display book-specific details
+            // You can use HTML or any other appropriate format
+            echo "<h1>Book Details</h1>";
+            echo "<p>SKU: " . $this->getSKU() . "</p>";
+            echo "<p>Name: " . $this->getName() . "</p>";
+            echo "<p>Price: " . $this->getPrice() . "</p>";
+            echo "<p>Weight: " . $this->getWeight() . "</p>";
+        }
+    }
 ?>
