@@ -220,7 +220,7 @@
                 size.value = "";
                 height.value = "";
                 width.value = "";
-                length.value = "";
+                length.value = "1";
             }
 
             //FURNITURE CONTROL FUNCTION
